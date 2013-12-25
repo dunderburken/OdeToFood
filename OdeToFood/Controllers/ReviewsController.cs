@@ -9,6 +9,14 @@ namespace OdeToFood.Controllers
 {
     public class ReviewsController : Controller
     {
+        public ActionResult BestReview()
+        {
+            var bestReview = from r in _reviews
+                             orderby r.Rating descending
+                             select r;
+            return PartialView("_Review",bestReview.First());
+        }
+
         //
         // GET: /Reviews/
         public ActionResult Index()
@@ -52,7 +60,9 @@ namespace OdeToFood.Controllers
         // GET: /Reviews/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var review = _reviews.Single(r => r.Id == id);
+
+            return View(review);
         }
 
         //
@@ -60,16 +70,12 @@ namespace OdeToFood.Controllers
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            try
+            var review = _reviews.Single(r => r.Id == id);
+            if (TryUpdateModel(review))
             {
-                // TODO: Add update logic here
-
                 return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            } 
+            return View(review);
         }
 
         //
@@ -108,7 +114,7 @@ namespace OdeToFood.Controllers
             new RestaurantReview{
                 Id = 2,
                 Name = "Marrakash",
-                City = "<script>alert('xss')</script>",
+                City = "Mykolayiv",
                 Country = "USA",
                 Rating = 10
             },
