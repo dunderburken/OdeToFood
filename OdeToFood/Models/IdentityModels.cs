@@ -12,6 +12,7 @@ namespace OdeToFood.Models
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
+
         }
     }
 }
