@@ -9,6 +9,7 @@ namespace OdeToFood.Controllers
 {
     public class ReviewsController : Controller
     {
+        [ChildActionOnly]
         public ActionResult BestReview()
         {
             var bestReview = from r in _reviews
