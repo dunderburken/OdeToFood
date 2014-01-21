@@ -8,7 +8,9 @@
 
 @Html.Partial("_Reviews",Model.Reviews)
 
+
 <p>
+    @Html.ActionLink("Back", "Index", "Restaurant") |
     @Html.ActionLink("Create New", "Create", new { restaurantId = Model.Id})
 </p>
 
