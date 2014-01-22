@@ -25,6 +25,12 @@ namespace OdeToFood.Controllers
                             CountOfReviews = r.Reviews.Count()
 
                         });
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Restaurants",model);
+            }
+
             return View(model);
         }
 
