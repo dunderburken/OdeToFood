@@ -9,8 +9,8 @@
     </form>*@
 
 @using (Ajax.BeginForm(
-    new AjaxOptions{
-        HttpMethod = "get",
+    new AjaxOptions{        
+        HttpMethod = "post",
         InsertionMode = InsertionMode.Replace,
         UpdateTargetId = "restaurantList"}))
 {
