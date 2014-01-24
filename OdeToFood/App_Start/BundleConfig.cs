@@ -9,11 +9,11 @@ namespace OdeToFood
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/otf").Include(
-                "~/Scripts/otf.js",        
-                "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery-ui-{version}.js",
                         "~/Scripts/jquery.unobtrusive*",
-                        "~/Scripts/jquery.validate*"
+                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/otf.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
