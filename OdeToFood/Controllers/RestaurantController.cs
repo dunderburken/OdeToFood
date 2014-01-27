@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OdeToFood.Models;
+using PagedList;
 
 namespace OdeToFood.Controllers
 {
@@ -15,9 +16,14 @@ namespace OdeToFood.Controllers
         private OdeToFoodDb db = new OdeToFoodDb();
 
         // GET: /Restaurant/
-        public ActionResult Index()
+        public ActionResult Index(int page=1)
         {
-            return View(db.Restaurants.ToList());
+            var model = db.Restaurants.ToList().ToPagedList(page, 10);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Restaurants", model);
+            }
+            return View(model);
         }       
 
         // GET: /Restaurant/Create

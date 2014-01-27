@@ -1,16 +1,16 @@
-﻿@model IEnumerable<OdeToFood.Models.Restaurant>
+﻿@*@model IEnumerable<OdeToFood.Models.Restaurant>*@
+@model IPagedList<Restaurant>
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
+
+@*<tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -21,25 +21,6 @@
             @Html.DisplayNameFor(model => model.Country)
         </th>
         <th></th>
-    </tr>
+    </tr>*@
+@Html.Partial("_Restaurants", Model)
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Reviews", "Index","Reviews", new { id=item.Id },null) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
