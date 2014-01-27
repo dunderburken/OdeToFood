@@ -11,10 +11,8 @@ $(function () {
         };
         console.log(options);
         $.ajax(options).done(function (data) {
-            var $target = $($form.attr("data-otf-target"));
-            console.log(data);
-            var $newHtml = $(data)
-            console.log($newHtml);
+            var $target = $($form.attr("data-otf-target"));           
+            var $newHtml = $(data)            
             $target.replaceWith($newHtml);
             $newHtml.effect("highlight");
         });
@@ -28,7 +26,7 @@ $(function () {
         var $form = $input.parents("form:first");
         $form.submit();
 
-    }
+    };
 
     var createAutocomplete = function () {
         var $input = $(this);
@@ -42,9 +40,29 @@ $(function () {
         };
         $input.autocomplete(options);
 
-    }
+    };
+
+    var getPage = function () {
+        var $a = $(this);
+        var options = {
+            url: $a.attr("href"),
+            type: "get",
+            data: $("form").serialize()
+        };
+
+        $.ajax(options).done(function (data) {
+            var target = $a.parents("div.pagedList").attr("data-otf-target");        
+            //$newHtml = $(data);
+            $(target).replaceWith(data);
+            //$newHtml.effect("highlight");
+
+        });
+        return false;
+    };
 
     $("form[data-otf-ajax='true']").submit(ajaxFormSubmit);
     $("input[data-otf-autocomplete]").each(createAutocomplete);
+
+    $(".main-content").on("click", ".pagedList a", getPage);
 
 });
