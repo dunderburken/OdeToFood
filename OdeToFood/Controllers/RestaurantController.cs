@@ -12,7 +12,19 @@ namespace OdeToFood.Controllers
 {
     public class RestaurantController : Controller
     {
-        private OdeToFoodDb db = new OdeToFoodDb();
+        private IOdeToFoodDb db = new OdeToFoodDb();
+
+        public RestaurantController(IOdeToFoodDb db)
+        {
+            // TODO: Complete member initialization
+            this.db1 = db1;
+        }
+
+        public RestaurantController(IOdeToFoodDb db)
+        {
+            // TODO: Complete member initialization
+            this.db1 = db1;
+        }
 
         // GET: /Restaurant/
         public ActionResult Index()
