@@ -6,15 +6,25 @@ using System.Web;
 
 namespace OdeToFood.Models
 {
-    public class OdeToFoodDb:DbContext
+    public interface IOdeToFoodDb:IDisposable
+    {
+        IQueryable<T> Query<T>() where T : class;
+    }
+    public class OdeToFoodDb:DbContext,IOdeToFoodDb
     {
         public OdeToFoodDb()
-            //: base("name=DefaultConnection")
+            : base("name=DefaultConnection")
         {
 
         }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<RestaurantReview> Reviews { get; set; }
         public DbSet<UserProfile> UserProfiles{ get; set; }
+
+        IQueryable<T> IOdeToFoodDb.Query<T>()
+        {
+            return Set<T>();
+        }
+
     }
 }

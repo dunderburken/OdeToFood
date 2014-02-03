@@ -33,6 +33,7 @@ namespace OdeToFood
             //   appSecret: "");
 
             app.UseGoogleAuthentication();
+            
         }
     }
 }

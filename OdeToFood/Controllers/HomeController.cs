@@ -5,16 +5,26 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using System.Web.UI;
 
 namespace OdeToFood.Controllers
 {    
     public class HomeController : Controller
     {
-        OdeToFoodDb _db = new OdeToFoodDb();
+        IOdeToFoodDb _db;
+        public HomeController()
+        {
+            _db = new OdeToFoodDb();
+        }
+
+        public HomeController(IOdeToFoodDb db)
+        {
+            _db = db;
+        }
 
         public ActionResult Autocomplete(string term)
         {
-            var model = _db.Restaurants
+            var model = _db.Query<Restaurant>()
                 .Where(r => r.Name.StartsWith(term))
                 //.OrderBy(r => r.Reviews.Count())
                 .Take(10)
@@ -24,9 +34,12 @@ namespace OdeToFood.Controllers
                 });
                 return Json(model,JsonRequestBehavior.AllowGet);
         }        
+
+        //[OutputCache(Duration=360,VaryByHeader="X-Requested-With",Location=OutputCacheLocation.Server)]
+        [OutputCache(CacheProfile = "Mild")]
         public ActionResult Index(string searchTerm = null, int page = 1)
         {
-            var model = _db.Restaurants
+            var model = _db.Query<Restaurant>()
                         .OrderByDescending(r => r.Reviews.Average(review => review.Rating))
                         .Where(r => searchTerm == null || r.Name.StartsWith(searchTerm))
                         .Select(r => new RestaurantListViewModel
