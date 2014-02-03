@@ -17,6 +17,7 @@ namespace OdeToFood.Controllers
     {
         public AccountController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+            //: this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new OdeToFoodDb())))
         {
         }
 
@@ -40,7 +41,7 @@ namespace OdeToFood.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]        
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)

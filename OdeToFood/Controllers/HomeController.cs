@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using PagedList;
 
 namespace OdeToFood.Controllers
-{
+{    
     public class HomeController : Controller
     {
         OdeToFoodDb _db = new OdeToFoodDb();
@@ -23,7 +23,7 @@ namespace OdeToFood.Controllers
                     label = r.Name
                 });
                 return Json(model,JsonRequestBehavior.AllowGet);
-        }
+        }        
         public ActionResult Index(string searchTerm = null, int page = 1)
         {
             var model = _db.Restaurants
@@ -46,7 +46,7 @@ namespace OdeToFood.Controllers
             
             return View(model);
         }
-
+        
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
