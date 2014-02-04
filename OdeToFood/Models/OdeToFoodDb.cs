@@ -39,12 +39,12 @@ namespace OdeToFood.Models
             Entry(entity).State = System.Data.Entity.EntityState.Modified;
         }
 
-        public void Remove<T>(T entity) where T : class
+        void IOdeToFoodDb.Remove<T>(T entity)
         {
             Set<T>().Remove(entity);
         }
 
-        public void SaveChanges()
+        void IOdeToFoodDb.SaveChanges()
         {
             SaveChanges();
         }
